@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@chainsafe/dappeteer": "^2.2.0",
+    "csv-parse": "^5.3.0",
     "dappeteer": "^1.0.0",
     "esbuild": "^0.13.10",
     "esbuild-register": "^3.0.0",

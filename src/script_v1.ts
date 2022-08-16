@@ -2,6 +2,29 @@ import puppeteer, { Page } from 'puppeteer';
 import dappeteer from '@chainsafe/dappeteer';
 import fs from 'fs';
 
+
+
+type OpenSeaObject = {
+  OpenSeaName: string;
+  OpenSeaColletion: string;
+  OpenSeaDescription: string;
+  OpenSeaLockContent: number;
+  OpenSea: number;
+  
+};
+
+const fileName: string = 'list_opensea.csv';
+
+fs.readFile(fileName, 'utf8', (err, data)=> {
+  console.log(data);
+});
+
+
+
+let fileContent = fs.readFileSync(fileName, 'utf8');
+console.log(fileContent);
+
+
 const collectionName = "Your Collection Name"
 
 const collectionURL = `https://opensea.io/${collectionName}/asset/create`
@@ -12,6 +35,7 @@ const lockedContent = `Locked content text here`
 
 const secretPhase = `here is your secret phase dont share it`
 
+// connection my wallet
 const connectWallet = async (page: Page, metamask) => {
   const button = await page.$('button.dBFmez:first-child');
   await button.click();
@@ -19,14 +43,16 @@ const connectWallet = async (page: Page, metamask) => {
   await metamask.approve();
 
   return;
-}
+} // .End connectionWallet
 
+
+// upload image
 const uploadImage = async (page: Page, file: string) => {
   const elementHandle = await page.$("#media");
   await elementHandle.uploadFile(`images/${file}`);
 
   return;
-}
+} // .End uploadImage
 
 const pageTimeout = async (number: number, page: Page) => {
   await page.waitForTimeout(number)
